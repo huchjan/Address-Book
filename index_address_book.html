@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="contacts"></div>
+
+    <div>
+        <input type="text" id="newContactName">
+        <button id="newContact">Create New Contact</button>
+        
+    </div>
+<!--    <button id="feedAll">Feed All</button>-->
+
+    <script>
+        function Contact(name, phone) {
+            this.name = name;
+            this.phone = "phone";
+
+//            this.feed = function () {
+//                this.food += 1;
+//            }
+//
+//            this.play = function () {
+//                this.food -= 1;
+//            }
+        }
+
+        function Model() {
+            this.contacts = [];
+        }
+
+        function Controller(model) {
+//            this.feedPets = function () {
+//                for (var i = 0; i < model.pets.length; i++) {
+//                    model.pets[i].feed();
+//                }
+//
+//            }
+
+            this.getAllContacts = function () {
+                return model.contacts;
+            }
+
+            this.createContact = function (name) {
+                model.contacts.push(new Contact(name));
+            }
+
+        }
+
+        function View(controller) {
+            this.showAllContacts = function () {
+                var world = document.getElementById("contacts");
+                world.innerHTML = "";
+                for (var i = 0; i < controller.getAllContacts().length; i++) {
+                    this.showContact(i);
+                }
+
+            }
+
+            this.showContact = function (index) {
+                var world = document.getElementById("contacts");
+                var contact = controller.getAllContacts()[index];
+                var c = document.createElement("div");
+//                var feed = document.createElement("button");
+//                var feedText = document.createTextNode("Feed");
+//                feed.appendChild(feedText);
+//                var play = document.createElement("button");
+//                var playText = document.createTextNode("Play");
+//                play.appendChild(playText);
+//                var feedAll = document.getElementById("feedAll");
+
+                c.className = "contact";
+                c.innerHTML = contact.name + "; " + contact.phone;
+                world.appendChild(c);
+                c.appendChild(phone);
+//                p.appendChild(play);
+                var view = this;
+//                feedAll.onclick = function () {
+//                    controller.feedPets();
+//                    view.showAllPets();
+//                }
+//                feed.onclick = function () {
+//                    pet.feed();
+//                    view.showAllPets();
+//                }
+//                play.onclick = function () {
+//                    pet.play();
+//                    view.showAllPets();
+//                }
+            }
+
+
+            this.createContact = function () {
+                var contactName = document.getElementById("newContactName").value;
+                controller.createContact(contactName);
+                this.showAllContacts();
+            }
+        }
+
+        var m = new Model();
+        var c = new Controller(m);
+        var v = new View(c);
+
+        document.getElementById("newContact").onclick = function () {
+            v.createContact();
+        }
+
+        v.showAllContacts();
+
+        
+    </script>
+</body>
+
+</html>
