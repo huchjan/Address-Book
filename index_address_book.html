@@ -7,112 +7,128 @@
 </head>
 
 <body>
-    <div id="contacts"></div>
+    <!--
+<form action="" method="postprocessform.php" role="form" class="form">
+
+        <input type="text" value="" name="personname" id="newPersonName" placeholder="enter first name" required/>
+        <br>
+
+        <input type="text" value="" name="personname" id="newPersonName" placeholder="enter last name" required/>
+
+        <br>
+
+        Another type of input field is a "hidden input value"
+        <input type="hidden" value="def" name="personname" id="newPersonName" />
+
+        <input type="phone number" value="def" name="personname" id="newPersonName" placeholder="enter phone number" required/>
+
+
+        <input type="submit" value="Submit" />
+
+    </form>
+-->
+
+    <div id="persons"></div>
 
     <div>
-        <input type="text" id="newContactName">
-        <button id="newContact">Create New Contact</button>
-        
+
+        <input type="text" id="newPersonName" placeholder="Enter Name">
+        <br>
+        <input type="text" id="newPersonPhone" placeholder="Enter Phone Number">
+        <br>
+        <input type="text" id="newBusinessName" placeholder="Enter Business">
+        <br>
+        <button id="newPerson">Submit</button>
+
     </div>
-<!--    <button id="feedAll">Feed All</button>-->
 
     <script>
-        function Contact(name, phone) {
+        function Person(name, phone) {
             this.name = name;
             this.phone = "phone";
 
-//            this.feed = function () {
-//                this.food += 1;
-//            }
-//
-//            this.play = function () {
-//                this.food -= 1;
-//            }
-        }
+            this.business = function () {
+                this.businessName = businessName;
 
-        function Model() {
-            this.contacts = [];
-        }
+                //            this.phone = function () {
+                //                for (var i = 0; i < model.persons.length; i++) {
+                //                    model.persons[i] + "" + model.phone[i];
+                //                }
 
-        function Controller(model) {
-//            this.feedPets = function () {
-//                for (var i = 0; i < model.pets.length; i++) {
-//                    model.pets[i].feed();
-//                }
-//
-//            }
-
-            this.getAllContacts = function () {
-                return model.contacts;
+            }
             }
 
-            this.createContact = function (name) {
-                model.contacts.push(new Contact(name));
+            function Model() {
+                this.persons = [];
             }
 
-        }
+            function Controller(model) {
+                //            this.feedPets = function () {
+                //                for (var i = 0; i < model.pets.length; i++) {
+                //                    model.pets[i].feed();
+                //                }
+                //
+                //            }
 
-        function View(controller) {
-            this.showAllContacts = function () {
-                var world = document.getElementById("contacts");
-                world.innerHTML = "";
-                for (var i = 0; i < controller.getAllContacts().length; i++) {
-                    this.showContact(i);
+                this.getAllPersons = function () {
+                    return model.persons;
                 }
 
+                this.createPerson = function (name) {
+                    model.persons.push(new Person(name));
+                }
+
+
             }
 
-            this.showContact = function (index) {
-                var world = document.getElementById("contacts");
-                var contact = controller.getAllContacts()[index];
-                var c = document.createElement("div");
-//                var feed = document.createElement("button");
-//                var feedText = document.createTextNode("Feed");
-//                feed.appendChild(feedText);
-//                var play = document.createElement("button");
-//                var playText = document.createTextNode("Play");
-//                play.appendChild(playText);
-//                var feedAll = document.getElementById("feedAll");
+            function View(controller) {
+                this.showAllPersons = function () {
+                    var world = document.getElementById("persons");
+                    world.innerHTML = "";
+                    for (var i = 0; i < controller.getAllPersons().length; i++) {
+                        this.showPerson(i);
+                    }
 
-                c.className = "contact";
-                c.innerHTML = contact.name + "; " + contact.phone;
-                world.appendChild(c);
-                c.appendChild(phone);
-//                p.appendChild(play);
-                var view = this;
-//                feedAll.onclick = function () {
-//                    controller.feedPets();
-//                    view.showAllPets();
-//                }
-//                feed.onclick = function () {
-//                    pet.feed();
-//                    view.showAllPets();
-//                }
-//                play.onclick = function () {
-//                    pet.play();
-//                    view.showAllPets();
-//                }
+                }
+
+                this.showPerson = function (index) {
+                    var world = document.getElementById("persons");
+                    var person = controller.getAllPersons()[index];
+                    var p = document.createElement("div");
+
+
+                    p.className = "person";
+                    p.classPhone = "phone";
+                    p.className = "business";
+                    p.innerHTML = person.name;
+                    world.appendChild(p);
+                }
+
+                this.createPerson = function () {
+
+                    var personName = document.getElementById("newPersonName").value;
+                    controller.createPerson(personName);
+                    this.showAllPersons();
+
+                    var personPhone = document.getElementById("newPersonPhone").value;
+                    controller.createPerson(personPhone);
+                    this.showAllPersons();
+
+                    var businessName = document.getElementById("newBusinessName").value;
+                    controller.createPerson(businessName);
+                    this.showAllPersons();
+                }
             }
 
+            var m = new Model();
+            var c = new Controller(m);
+            var v = new View(c);
 
-            this.createContact = function () {
-                var contactName = document.getElementById("newContactName").value;
-                controller.createContact(contactName);
-                this.showAllContacts();
-            }
-        }
+            document.getElementById("newPerson").onclick = function () {
+                    v.createPerson();
+                }
 
-        var m = new Model();
-        var c = new Controller(m);
-        var v = new View(c);
-
-        document.getElementById("newContact").onclick = function () {
-            v.createContact();
-        }
-
-        v.showAllContacts();
-
-        
+            v.showAllPersons();
     </script>
 </body>
 
